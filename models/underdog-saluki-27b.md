@@ -26,5 +26,3 @@
 | Benchmark | Run | Score | Notes |
 |---|---|---|---|
 | Minecraft | 3 | 27/100 FAIL | [notes](../benchmarks/minecraft/underdog-saluki-27b/run-3/notes.md) |
-
-Runs 1 and 2 used an earlier prompt (desktop game, any technology) and are not published: run 1 thought for 32,000 tokens without calling a tool; run 2 wrote a Python game that crashes at startup, then looped for 55 minutes on the same test.
