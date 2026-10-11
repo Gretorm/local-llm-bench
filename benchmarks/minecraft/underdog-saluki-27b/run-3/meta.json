@@ -1,0 +1,11 @@
+{
+  "benchmark": "minecraft",
+  "model": "Underdog Saluki 27B",
+  "model_slug": "underdog-saluki-27b",
+  "quant": "IQ2 mix",
+  "run": 3,
+  "date": "2026-10-11",
+  "agent": "opencode 1.19.0",
+  "score": 27,
+  "verdict": "FAIL"
+}

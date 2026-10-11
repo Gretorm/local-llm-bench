@@ -1,0 +1,233 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Segoe UI', 'Consolas', monospace;
+  color: #fff;
+}
+
+#game {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hidden { display: none !important; }
+
+/* HUD */
+#hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#crosshair {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+}
+#crosshair::before, #crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.85);
+}
+#crosshair::before {
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+#crosshair::after {
+  top: 50%;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+#info {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  font-size: 13px;
+  text-shadow: 0 0 3px #000;
+  line-height: 1.5;
+}
+
+#vitals {
+  position: absolute;
+  left: 50%;
+  bottom: 70px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+#hearts, #hunger {
+  display: flex;
+  gap: 2px;
+}
+
+.heart {
+  width: 10px;
+  height: 10px;
+  background: #e03030;
+  transform: rotate(45deg);
+  border-radius: 0 50% 50% 50%;
+  box-shadow: 0 0 2px #000;
+}
+.heart.empty { background: #3a3a3a; }
+
+.bar {
+  width: 8px;
+  height: 12px;
+  background: #ff9020;
+  border: 1px solid #000;
+}
+.bar.empty { background: #3a3a3a; }
+
+#hotbar {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+
+.slot {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.slot.selected { border-color: #fff; }
+.slot .icon {
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
+}
+.slot .count {
+  position: absolute;
+  right: 1px;
+  bottom: 0;
+  font-size: 11px;
+  text-shadow: 0 0 2px #000;
+}
+
+/* overlays */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  pointer-events: auto;
+}
+.titlebox {
+  max-width: 640px;
+  padding: 28px 36px;
+  background: #1b1b1b;
+  border: 2px solid #444;
+  text-align: center;
+}
+.titlebox h1 {
+  font-size: 44px;
+  letter-spacing: 6px;
+  color: #7fff7f;
+  text-shadow: 0 0 12px rgba(127, 255, 127, 0.4);
+  margin: 0 0 8px;
+}
+.titlebox h2 { margin: 0 0 16px; }
+.sub { color: #aaa; margin: 0 0 20px; }
+.btns { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; }
+.btn {
+  background: #3a3a3a;
+  color: #fff;
+  border: 2px solid #666;
+  padding: 10px 22px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.btn:hover { background: #4a4a4a; border-color: #999; }
+.controls ul {
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #ccc;
+}
+.controls h3 { color: #aaa; margin: 12px 0 6px; }
+
+/* inventory / crafting / furnace */
+.slotgrid {
+  display: grid;
+  grid-template-columns: repeat(6, 36px);
+  gap: 2px;
+  margin: 12px 0;
+}
+.slotgrid.g3 {
+  grid-template-columns: repeat(3, 36px);
+}
+.slotrow {
+  display: flex;
+  gap: 2px;
+  margin: 12px 0;
+}
+.slot.big {
+  width: 52px;
+  height: 52px;
+}
+.arrow {
+  font-size: 24px;
+  color: #aaa;
+  margin: 0 10px;
+  align-self: center;
+}
+.hint {
+  font-size: 12px;
+  color: #aaa;
+  margin: 6px 0;
+  line-height: 1.6;
+}
+
+/* furnace */
+.furnacecols {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin: 12px 0;
+}
+.furnacecol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.prog {
+  height: 10px;
+  background: #333;
+  margin: 8px 0;
+  width: 200px;
+}
+
+/* underwater tint */
+#underwater {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(30, 90, 160, 0.35);
+}

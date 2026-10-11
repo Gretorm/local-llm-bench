@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local LLM Bench</title>
+<meta name="description" content="Open-weight LLMs running locally on one consumer GPU, tested as autonomous coding agents. Every game is playable in the browser.">
+<style>
+  :root { --bg:#f7f7f5; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e2dd; --card:#ffffff; --accent:#2f6fde; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#141413; --fg:#ececea; --muted:#9a9a94; --line:#2c2c2a; --card:#1c1c1b; --accent:#6c9cff; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width:880px; margin:0 auto; padding:48px 16px; }
+  h1 { font-size:2rem; margin:0 0 8px; letter-spacing:-.02em; }
+  .lead { color:var(--muted); margin:0 0 32px; max-width:640px; }
+  h2 { font-size:1.15rem; margin:0 0 12px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; }
+  th, td { padding:14px 16px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th { font-size:.8rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+  tr:last-child td { border-bottom:none; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .sub { display:block; font-size:.8rem; color:var(--muted); }
+  .play { display:inline-block; padding:6px 14px; border-radius:999px; background:var(--accent); color:#fff; font-weight:600; }
+  .play:hover { text-decoration:none; opacity:.9; }
+  .score { font-weight:700; font-size:1.2rem; color:var(--c); }
+  .score::after { content:"/100"; font-size:.8rem; color:var(--muted); font-weight:400; margin-left:2px; }
+  footer { margin-top:32px; color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Local LLM Bench</h1>
+  <p class="lead">Open-weight LLMs running locally on a single consumer GPU (AMD RX 9070 XT, 16&nbsp;GB), used as autonomous coding agents. Same prompt for every model, no human help. Every game below is the model's raw output, playable in your browser.</p>
+  <h2>Minecraft clone</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Model</th><th>Play</th><th>Score</th><th>Notes</th><th>Code</th></tr></thead>
+      <tbody>
+<tr><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/models/underdog-saluki-27b.md">Underdog Saluki 27B</a><span class="sub">IQ2 mix · run 3 · 2026-10-11</span></td><td><a class="play" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-3/game/">▶ Play</a></td><td><span class="score" style="--c:#c8423b">27</span><span class="sub">FAIL</span></td><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/underdog-saluki-27b/run-3/notes.md">Notes</a></td><td><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/underdog-saluki-27b/run-3/game">Code</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <footer>Protocol, prompt and scoring: <a href="https://github.com/Gretorm/local-llm-bench/blob/main/PROTOCOL.md">PROTOCOL.md</a> · <a href="https://github.com/Gretorm/local-llm-bench">Source on GitHub</a></footer>
+</main>
+</body>
+</html>
