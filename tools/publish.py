@@ -83,7 +83,7 @@ def main():
         dst = ROOT / "benchmarks" / bench / model / f"run-{run}" / "game"
         if dst.exists():
             shutil.rmtree(dst)
-        shutil.copytree(src, dst)
+        shutil.copytree(src, dst, ignore=shutil.ignore_patterns(".git"))
         print(f"copied {src} -> {dst.relative_to(ROOT)}")
         return
     runs = load_runs()
