@@ -11,18 +11,30 @@
 
 Models must fit in 16 GB of VRAM (weights + KV cache).
 
-## Software
+## Agent environment
 
-- **Inference**: official [llama.cpp](https://github.com/ggml-org/llama.cpp) builds (`llama-server`, bound to `127.0.0.1`).
-- **Coding agent**: [opencode](https://opencode.ai), connected to `llama-server` through its OpenAI-compatible API.
+Identical for every model; each run's notes list any difference.
+
+| | |
+|---|---|
+| Inference | Official [llama.cpp](https://github.com/ggml-org/llama.cpp) build, `llama-server` bound to `127.0.0.1` |
+| Agent | [opencode](https://opencode.ai), connected through the OpenAI-compatible API |
+| Context | 131,072 tokens, KV cache `q8_0` |
+| Tools | Shell (PowerShell), file tools, web fetch, web search (DuckDuckGo MCP), browser ([Playwright MCP](https://github.com/microsoft/playwright-mcp), Edge, isolated profile; screenshots sent only to vision models) |
+| Permissions | Everything allowed inside the run folder, nothing outside it |
+
+The run folder is its own git repository and opencode starts with `OPENCODE_DISABLE_CLAUDE_CODE=1`, so no instruction file from parent folders (which hold the evaluation grid) can reach the model.
+
+Run 3 of Underdog Saluki 27B predates part of this setup: 262,144-token context (KV `q4_0`), no browser tool, access outside the run folder allowed.
 
 ## Procedure (Minecraft benchmark)
 
-1. Create an empty folder for the run.
-2. Start opencode in it with `OPENCODE_DISABLE_CLAUDE_CODE=1`, so that no instruction file from parent folders (which contain the evaluation grid) reaches the model.
-3. Paste the prompt below, unchanged.
-4. No human help during the run. The only allowed answer is "continue" if the agent stops to ask for permission. Any other intervention is logged in the run notes.
-5. The produced folder is published **untouched**: what you play is the model's raw output. Nobody fixes the code.
+1. Empty folder, the prompt below pasted unchanged.
+2. No human help. The only allowed actions:
+   - answering "continue" if the agent stops to ask for permission;
+   - unblocking: if a tool call hangs for more than 5 minutes (typically a web server started in the foreground), the blocking process is killed. Each unblock counts as an **intervention**.
+3. The run ends when the agent stops on its own, after 3 interventions, or after 15 minutes of looping.
+4. The produced folder is published **untouched**: what you play is the model's raw output. Nobody fixes the code.
 
 ## Prompt
 
@@ -38,6 +50,8 @@ Constraints:
 
 Deliver a playable game, not a demo. At the end, write a README.md that explains how to launch the game, the choices you made and why, what is done and what is missing compared to Minecraft.
 ```
+
+Web search and third-party libraries are allowed. Downloaded game assets or code copied from existing games are flagged in the run notes.
 
 ## Scoring (out of 100)
 
