@@ -48,15 +48,29 @@ def build_readme(runs):
         "",
     ]
     for bench in sorted({r["benchmark"] for r in runs}):
+        bench_runs = [x for x in runs if x["benchmark"] == bench]  # sorted by score, best first
+        models = list(dict.fromkeys(r["model_slug"] for r in bench_runs))
         out += [f"## {bench.capitalize()} clone", "",
-                "| Model | Play | Score | Notes | Code |", "|---|---|---|---|---|"]
-        for r in (x for x in runs if x["benchmark"] == bench):
-            out.append(
-                f"| [{r['model']}]({r['model_page']}) {r['quant']} · run {r['run']} "
-                f"| [▶ Play]({r['play']}) | **{r['score']}/100** {r['verdict']} "
-                f"| [Notes]({r['notes']}) | [Code]({r['code']}) |"
-            )
-        out.append("")
+                "Models ranked by their best run; click a model to see all its runs.", ""]
+        for slug in models:
+            b = next(x for x in bench_runs if x["model_slug"] == slug)  # best run
+            mruns = sorted((x for x in bench_runs if x["model_slug"] == slug), key=lambda x: x["run"])
+            n = f"{len(mruns)} run{'s' if len(mruns) > 1 else ''}"
+            out += [f"<details><summary><b><a href=\"{b['model_page']}\">{b['model']}</a></b> {b['quant']} — "
+                    f"<b>{b['score']}/100</b> {b['verdict']} (best of {n}: run {b['run']}) · "
+                    f"<a href=\"{b['play']}\">▶ Play</a> · <a href=\"{b['notes']}\">Notes</a> · "
+                    f"<a href=\"{b['code']}\">Code</a></summary>", "",
+                    "| Run | Play | Score | Notes | Code | Context window | tok/s |",
+                    "|---|---|---|---|---|---|---|"]
+            for r in mruns:
+                ctx = f"{round(r['context'] / 1000)}K" if r.get("context") else "—"
+                if r.get("kv_cache"):
+                    ctx += f" (KV {r['kv_cache']})"
+                out.append(
+                    f"| {r['run']} | [▶ Play]({r['play']}) | **{r['score']}/100** {r['verdict']} "
+                    f"| [Notes]({r['notes']}) | [Code]({r['code']}) | {ctx} | {r.get('tok_s', '—')} |"
+                )
+            out += ["", "</details>", ""]
     return "\n".join(out)
 
 

@@ -6,5 +6,8 @@
   "run": 2,
   "agent": "opencode 1.19.0",
   "score": 3,
-  "verdict": "FAIL"
+  "verdict": "FAIL",
+  "context": 131072,
+  "kv_cache": "q8_0",
+  "tok_s": 48.8
 }
