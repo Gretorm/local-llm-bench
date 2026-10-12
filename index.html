@@ -6,28 +6,45 @@
 <title>Local LLM Bench</title>
 <meta name="description" content="Open-weight LLMs running locally on one consumer GPU, tested as autonomous coding agents. Every game is playable in the browser.">
 <style>
-  :root { --bg:#f7f7f5; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e2dd; --card:#ffffff; --accent:#2f6fde; }
+  :root { --bg:#f7f7f5; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e2dd; --card:#ffffff; --sunk:#f1f1ee; --accent:#2f6fde; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#141413; --fg:#ececea; --muted:#9a9a94; --line:#2c2c2a; --card:#1c1c1b; --accent:#6c9cff; }
+    :root { --bg:#141413; --fg:#ececea; --muted:#9a9a94; --line:#2c2c2a; --card:#1c1c1b; --sunk:#181817; --accent:#6c9cff; }
   }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
   main { max-width:880px; margin:0 auto; padding:48px 16px; }
   h1 { font-size:2rem; margin:0 0 8px; letter-spacing:-.02em; }
   .lead { color:var(--muted); margin:0 0 32px; max-width:640px; }
-  h2 { font-size:1.15rem; margin:0 0 12px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; }
-  th, td { padding:14px 16px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
-  th { font-size:.8rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
-  tr:last-child td { border-bottom:none; }
+  h2 { font-size:1.15rem; margin:32px 0 4px; }
+  .hint { color:var(--muted); font-size:.9rem; margin:0 0 12px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
   a { color:var(--accent); text-decoration:none; }
   a:hover { text-decoration:underline; }
   .sub { display:block; font-size:.8rem; color:var(--muted); }
-  .play { display:inline-block; padding:6px 14px; border-radius:999px; background:var(--accent); color:#fff; font-weight:600; }
+  .play { display:inline-block; padding:6px 14px; border-radius:999px; background:var(--accent); color:#fff; font-weight:600; white-space:nowrap; }
   .play:hover { text-decoration:none; opacity:.9; }
+  .play.small { padding:3px 10px; font-size:.85rem; }
   .score { font-weight:700; font-size:1.2rem; color:var(--c); }
   .score::after { content:"/100"; font-size:.8rem; color:var(--muted); font-weight:400; margin-left:2px; }
+  details + details { border-top:1px solid var(--line); }
+  summary { list-style:none; cursor:pointer; display:grid; align-items:center; gap:12px 16px; padding:14px 16px;
+            grid-template-columns: minmax(0,1fr) auto 84px auto auto 72px; }
+  summary::-webkit-details-marker { display:none; }
+  summary:hover { background:var(--sunk); }
+  .runs { font-size:.85rem; color:var(--muted); text-align:right; white-space:nowrap; }
+  .runs::after { content:" ▾"; }
+  details[open] .runs::after { content:" ▴"; }
+  .detail { background:var(--sunk); border-top:1px solid var(--line); overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th, td { padding:10px 16px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th { font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+  tr:last-child td { border-bottom:none; }
+  td .score { font-size:1rem; }
+  @media (max-width:640px) {
+    summary { display:flex; flex-wrap:wrap; gap:8px 14px; }
+    summary .model { flex-basis:100%; }
+    summary .runs { margin-left:auto; }
+  }
   footer { margin-top:32px; color:var(--muted); font-size:.9rem; }
 </style>
 </head>
@@ -36,15 +53,17 @@
   <h1>Local LLM Bench</h1>
   <p class="lead">Open-weight LLMs running locally on a single consumer GPU (AMD RX 9070 XT, 16&nbsp;GB), used as autonomous coding agents. Same prompt for every model, no human help. Every game below is the model's raw output, playable in your browser.</p>
   <h2>Minecraft clone</h2>
+  <p class="hint">Models ranked by their best run. Click a row to see every run.</p>
   <div class="card">
-    <table>
-      <thead><tr><th>Model</th><th>Play</th><th>Score</th><th>Notes</th><th>Code</th></tr></thead>
-      <tbody>
-<tr><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/models/qwen3.8-27b.md">Qwen3.8 27B</a><span class="sub">UD-IQ3_XXS · run 1</span></td><td><a class="play" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/qwen3.8-27b/run-1/game/">▶ Play</a></td><td><span class="score" style="--c:#d08a1a">68</span><span class="sub">PARTIAL</span></td><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/qwen3.8-27b/run-1/notes.md">Notes</a></td><td><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/qwen3.8-27b/run-1/game">Code</a></td></tr>
-<tr><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/models/underdog-saluki-27b.md">Underdog Saluki 27B</a><span class="sub">IQ2 mix · run 1</span></td><td><a class="play" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-1/game/">▶ Play</a></td><td><span class="score" style="--c:#c8423b">29</span><span class="sub">FAIL</span></td><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/underdog-saluki-27b/run-1/notes.md">Notes</a></td><td><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/underdog-saluki-27b/run-1/game">Code</a></td></tr>
-<tr><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/models/underdog-saluki-27b.md">Underdog Saluki 27B</a><span class="sub">IQ2 mix · run 2</span></td><td><a class="play" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-2/game/">▶ Play</a></td><td><span class="score" style="--c:#c8423b">3</span><span class="sub">FAIL</span></td><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/underdog-saluki-27b/run-2/notes.md">Notes</a></td><td><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/underdog-saluki-27b/run-2/game">Code</a></td></tr>
-      </tbody>
-    </table>
+<details><summary><span class="model"><a href="https://github.com/Gretorm/local-llm-bench/blob/main/models/qwen3.8-27b.md">Qwen3.8 27B</a><span class="sub">UD-IQ3_XXS · best: run 1</span></span><a class="play" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/qwen3.8-27b/run-1/game/">▶ Play</a><span><span class="score" style="--c:#d08a1a">68</span><span class="sub">PARTIAL</span></span><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/qwen3.8-27b/run-1/notes.md">Notes</a><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/qwen3.8-27b/run-1/game">Code</a><span class="runs">1 run</span></summary>
+<div class="detail"><table><thead><tr><th>Run</th><th>Play</th><th>Score</th><th>Notes</th><th>Code</th><th>Context window</th><th>tok/s</th></tr></thead><tbody>
+<tr><td>1</td><td><a class="play small" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/qwen3.8-27b/run-1/game/">▶ Play</a></td><td><span class="score" style="--c:#d08a1a">68</span> <span class="sub">PARTIAL</span></td><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/qwen3.8-27b/run-1/notes.md">Notes</a></td><td><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/qwen3.8-27b/run-1/game">Code</a></td><td>131K (KV q8_0)</td><td>18.2</td></tr>
+</tbody></table></div></details>
+<details><summary><span class="model"><a href="https://github.com/Gretorm/local-llm-bench/blob/main/models/underdog-saluki-27b.md">Underdog Saluki 27B</a><span class="sub">IQ2 mix · best: run 1</span></span><a class="play" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-1/game/">▶ Play</a><span><span class="score" style="--c:#c8423b">29</span><span class="sub">FAIL</span></span><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/underdog-saluki-27b/run-1/notes.md">Notes</a><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/underdog-saluki-27b/run-1/game">Code</a><span class="runs">2 runs</span></summary>
+<div class="detail"><table><thead><tr><th>Run</th><th>Play</th><th>Score</th><th>Notes</th><th>Code</th><th>Context window</th><th>tok/s</th></tr></thead><tbody>
+<tr><td>1</td><td><a class="play small" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-1/game/">▶ Play</a></td><td><span class="score" style="--c:#c8423b">29</span> <span class="sub">FAIL</span></td><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/underdog-saluki-27b/run-1/notes.md">Notes</a></td><td><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/underdog-saluki-27b/run-1/game">Code</a></td><td>262K (KV q4_0)</td><td>41.6</td></tr>
+<tr><td>2</td><td><a class="play small" href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-2/game/">▶ Play</a></td><td><span class="score" style="--c:#c8423b">3</span> <span class="sub">FAIL</span></td><td><a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/underdog-saluki-27b/run-2/notes.md">Notes</a></td><td><a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/underdog-saluki-27b/run-2/game">Code</a></td><td>131K (KV q8_0)</td><td>48.8</td></tr>
+</tbody></table></div></details>
   </div>
   <footer>Protocol, prompt and scoring: <a href="https://github.com/Gretorm/local-llm-bench/blob/main/PROTOCOL.md">PROTOCOL.md</a> · <a href="https://github.com/Gretorm/local-llm-bench">Source on GitHub</a></footer>
 </main>

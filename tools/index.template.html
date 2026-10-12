@@ -6,28 +6,45 @@
 <title>Local LLM Bench</title>
 <meta name="description" content="Open-weight LLMs running locally on one consumer GPU, tested as autonomous coding agents. Every game is playable in the browser.">
 <style>
-  :root { --bg:#f7f7f5; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e2dd; --card:#ffffff; --accent:#2f6fde; }
+  :root { --bg:#f7f7f5; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e2dd; --card:#ffffff; --sunk:#f1f1ee; --accent:#2f6fde; }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#141413; --fg:#ececea; --muted:#9a9a94; --line:#2c2c2a; --card:#1c1c1b; --accent:#6c9cff; }
+    :root { --bg:#141413; --fg:#ececea; --muted:#9a9a94; --line:#2c2c2a; --card:#1c1c1b; --sunk:#181817; --accent:#6c9cff; }
   }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
   main { max-width:880px; margin:0 auto; padding:48px 16px; }
   h1 { font-size:2rem; margin:0 0 8px; letter-spacing:-.02em; }
   .lead { color:var(--muted); margin:0 0 32px; max-width:640px; }
-  h2 { font-size:1.15rem; margin:0 0 12px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; }
-  th, td { padding:14px 16px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
-  th { font-size:.8rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
-  tr:last-child td { border-bottom:none; }
+  h2 { font-size:1.15rem; margin:32px 0 4px; }
+  .hint { color:var(--muted); font-size:.9rem; margin:0 0 12px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
   a { color:var(--accent); text-decoration:none; }
   a:hover { text-decoration:underline; }
   .sub { display:block; font-size:.8rem; color:var(--muted); }
-  .play { display:inline-block; padding:6px 14px; border-radius:999px; background:var(--accent); color:#fff; font-weight:600; }
+  .play { display:inline-block; padding:6px 14px; border-radius:999px; background:var(--accent); color:#fff; font-weight:600; white-space:nowrap; }
   .play:hover { text-decoration:none; opacity:.9; }
+  .play.small { padding:3px 10px; font-size:.85rem; }
   .score { font-weight:700; font-size:1.2rem; color:var(--c); }
   .score::after { content:"/100"; font-size:.8rem; color:var(--muted); font-weight:400; margin-left:2px; }
+  details + details { border-top:1px solid var(--line); }
+  summary { list-style:none; cursor:pointer; display:grid; align-items:center; gap:12px 16px; padding:14px 16px;
+            grid-template-columns: minmax(0,1fr) auto 84px auto auto 72px; }
+  summary::-webkit-details-marker { display:none; }
+  summary:hover { background:var(--sunk); }
+  .runs { font-size:.85rem; color:var(--muted); text-align:right; white-space:nowrap; }
+  .runs::after { content:" ▾"; }
+  details[open] .runs::after { content:" ▴"; }
+  .detail { background:var(--sunk); border-top:1px solid var(--line); overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th, td { padding:10px 16px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th { font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; }
+  tr:last-child td { border-bottom:none; }
+  td .score { font-size:1rem; }
+  @media (max-width:640px) {
+    summary { display:flex; flex-wrap:wrap; gap:8px 14px; }
+    summary .model { flex-basis:100%; }
+    summary .runs { margin-left:auto; }
+  }
   footer { margin-top:32px; color:var(--muted); font-size:.9rem; }
 </style>
 </head>
@@ -35,15 +52,7 @@
 <main>
   <h1>Local LLM Bench</h1>
   <p class="lead">Open-weight LLMs running locally on a single consumer GPU (AMD RX 9070 XT, 16&nbsp;GB), used as autonomous coding agents. Same prompt for every model, no human help. Every game below is the model's raw output, playable in your browser.</p>
-  <h2>Minecraft clone</h2>
-  <div class="card">
-    <table>
-      <thead><tr><th>Model</th><th>Play</th><th>Score</th><th>Notes</th><th>Code</th></tr></thead>
-      <tbody>
-{{ROWS}}
-      </tbody>
-    </table>
-  </div>
+{{SECTIONS}}
   <footer>Protocol, prompt and scoring: <a href="{{REPO}}/blob/main/PROTOCOL.md">PROTOCOL.md</a> · <a href="{{REPO}}">Source on GitHub</a></footer>
 </main>
 </body>

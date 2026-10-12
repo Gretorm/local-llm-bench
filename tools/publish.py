@@ -63,32 +63,60 @@ def build_readme(runs):
                     "| Run | Play | Score | Notes | Code | Context window | tok/s |",
                     "|---|---|---|---|---|---|---|"]
             for r in mruns:
-                ctx = f"{round(r['context'] / 1000)}K" if r.get("context") else "—"
-                if r.get("kv_cache"):
-                    ctx += f" (KV {r['kv_cache']})"
                 out.append(
                     f"| {r['run']} | [▶ Play]({r['play']}) | **{r['score']}/100** {r['verdict']} "
-                    f"| [Notes]({r['notes']}) | [Code]({r['code']}) | {ctx} | {r.get('tok_s', '—')} |"
+                    f"| [Notes]({r['notes']}) | [Code]({r['code']}) | {context_label(r)} | {r.get('tok_s', '—')} |"
                 )
             out += ["", "</details>", ""]
     return "\n".join(out)
 
 
+def context_label(r):
+    ctx = f"{round(r['context'] / 1000)}K" if r.get("context") else "—"
+    return ctx + (f" (KV {r['kv_cache']})" if r.get("kv_cache") else "")
+
+
 def build_index(runs):
-    rows = []
-    for r in runs:
-        e = {k: html.escape(str(v)) for k, v in r.items()}
-        rows.append(
-            f'<tr><td><a href="{e["model_page"]}">{e["model"]}</a>'
-            f'<span class="sub">{e["quant"]} · run {e["run"]}</span></td>'
-            f'<td><a class="play" href="{e["play"]}">▶ Play</a></td>'
-            f'<td><span class="score" style="--c:{verdict_color(r["score"])}">{e["score"]}</span>'
-            f'<span class="sub">{e["verdict"]}</span></td>'
-            f'<td><a href="{e["notes"]}">Notes</a></td>'
-            f'<td><a href="{e["code"]}">Code</a></td></tr>'
+    sections = []
+    for bench in sorted({r["benchmark"] for r in runs}):
+        bench_runs = [x for x in runs if x["benchmark"] == bench]  # sorted by score, best first
+        items = []
+        for slug in dict.fromkeys(r["model_slug"] for r in bench_runs):
+            b = next(x for x in bench_runs if x["model_slug"] == slug)  # best run
+            mruns = sorted((x for x in bench_runs if x["model_slug"] == slug), key=lambda x: x["run"])
+            e = {k: html.escape(str(v)) for k, v in b.items()}
+            n = f"{len(mruns)} run{'s' if len(mruns) > 1 else ''}"
+            rows = []
+            for r in mruns:
+                f = {k: html.escape(str(v)) for k, v in r.items()}
+                rows.append(
+                    f'<tr><td>{f["run"]}</td>'
+                    f'<td><a class="play small" href="{f["play"]}">▶ Play</a></td>'
+                    f'<td><span class="score" style="--c:{verdict_color(r["score"])}">{f["score"]}</span> '
+                    f'<span class="sub">{f["verdict"]}</span></td>'
+                    f'<td><a href="{f["notes"]}">Notes</a></td><td><a href="{f["code"]}">Code</a></td>'
+                    f'<td>{html.escape(context_label(r))}</td><td>{html.escape(str(r.get("tok_s", "—")))}</td></tr>'
+                )
+            items.append(
+                f'<details><summary>'
+                f'<span class="model"><a href="{e["model_page"]}">{e["model"]}</a>'
+                f'<span class="sub">{e["quant"]} · best: run {e["run"]}</span></span>'
+                f'<a class="play" href="{e["play"]}">▶ Play</a>'
+                f'<span><span class="score" style="--c:{verdict_color(b["score"])}">{e["score"]}</span>'
+                f'<span class="sub">{e["verdict"]}</span></span>'
+                f'<a href="{e["notes"]}">Notes</a><a href="{e["code"]}">Code</a>'
+                f'<span class="runs">{n}</span></summary>\n'
+                f'<div class="detail"><table><thead><tr><th>Run</th><th>Play</th><th>Score</th><th>Notes</th>'
+                f'<th>Code</th><th>Context window</th><th>tok/s</th></tr></thead><tbody>\n'
+                + "\n".join(rows) + "\n</tbody></table></div></details>"
+            )
+        sections.append(
+            f'  <h2>{html.escape(bench.capitalize())} clone</h2>\n'
+            f'  <p class="hint">Models ranked by their best run. Click a row to see every run.</p>\n'
+            f'  <div class="card">\n' + "\n".join(items) + "\n  </div>"
         )
     tpl = (ROOT / "tools" / "index.template.html").read_text(encoding="utf-8")
-    return tpl.replace("{{ROWS}}", "\n".join(rows)).replace("{{REPO}}", REPO)
+    return tpl.replace("{{SECTIONS}}", "\n".join(sections)).replace("{{REPO}}", REPO)
 
 
 def main():
