@@ -25,7 +25,7 @@ Identical for every model; each run's notes list any difference.
 
 The run folder is its own git repository and opencode starts with `OPENCODE_DISABLE_CLAUDE_CODE=1`, so no instruction file from parent folders (which hold the evaluation grid) can reach the model.
 
-Run 3 of Underdog Saluki 27B predates part of this setup: 262,144-token context (KV `q4_0`), no browser tool, access outside the run folder allowed.
+Run 1 of Underdog Saluki 27B predates part of this setup: 262,144-token context (KV `q4_0`), no browser tool, access outside the run folder allowed.
 
 ## Procedure (Minecraft benchmark)
 
@@ -67,3 +67,14 @@ Evaluated by a human player. The grid is never shown to the model.
 | Works as plain static files | 5 |
 
 Verdict: **PASS** ≥ 70, **PARTIAL** 40-69, **FAIL** < 40.
+
+**Playability anchors.** The reference is the real Minecraft, as the prompt asks. Scores fall between anchors; a bug counts once, in the criterion it hurts most.
+
+| Criterion | 5 | 10 | 15 |
+|---|---|---|---|
+| Rendering | World visible but major defects (missing faces, no textures, wrong colors, ghost or invisible blocks) | Textured blocks, terrain with trees, water and sky, consistent shading, minor glitches | Close to Minecraft: per-face textures, transparency (leaves, water, glass), block light (torches) and day/night lighting, held item/hand, crack animation, no visual bug |
+| Controls | Moves, but major defects (wrong directions, inverted camera, stuck or falling through) | WASD, mouse look, jump, correct collisions, minor glitches | Minecraft feel: sprint, sneak (edge safety), swim, fly, no collision glitch |
+| Interactions | Break or place only partly works (logic or display missing) | Break and place work and render correctly, hotbar selection | Minecraft rules: break time per material/tool, drops picked up into the inventory, placing uses the inventory, interactive blocks (crafting table, chest, furnace, door) |
+| Content and UI | HUD and menus only (fixed hotbar palette, hearts, pause) | One survival system that works: inventory + crafting, or mobs; sounds | Full survival loop: inventory, crafting, mobs, health/hunger, saves, several biomes, credible sounds |
+
+A PASS needs most of the 10-anchors plus part of the survival content; 90+ means close to Minecraft.

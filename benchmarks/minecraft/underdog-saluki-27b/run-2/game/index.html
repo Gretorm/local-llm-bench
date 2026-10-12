@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blockcraft</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <div id="hearts"></div>
+  <div id="hunger"></div>
+  <div id="selected-name"></div>
+  <div id="clock"></div>
+  <div id="debug"></div>
+
+  <div class="screen" id="menu">
+    <h2>Menu</h2>
+    <button id="btn-resume">Resume</button>
+    <button id="btn-save-quit">Save &amp; Quit</button>
+    <button id="btn-new-world">New World</button>
+    <button id="btn-help">Help</button>
+  </div>
+
+  <div class="screen" id="inventory-screen">
+    <h2>Inventory</h2>
+    <div class="slot-row" id="inv-hotbar"></div>
+    <div class="slot-grid" id="inv-main"></div>
+    <p class="hint">Click to pick up / place. Q drops selected item.</p>
+  </div>
+
+  <div class="screen" id="crafting-screen">
+    <h2>Crafting</h2>
+    <div class="craft-area">
+      <div class="slot-grid" id="craft-grid"></div>
+      <div class="craft-out"><div class="slot" id="craft-out-slot"></div></div>
+    </div>
+    <div class="slot-row" id="craft-hotbar"></div>
+    <div class="slot-grid" id="craft-main"></div>
+  </div>
+
+  <div class="screen" id="furnace-screen">
+    <h2>Furnace</h2>
+    <div class="furnace-area">
+      <div class="slot" id="furn-input"></div>
+      <div class="slot" id="furn-fuel"></div>
+      <div class="slot" id="furn-output"></div>
+      <div class="progress" id="furn-progress"></div>
+    </div>
+    <div class="slot-row" id="furn-hotbar"></div>
+    <div class="slot-grid" id="furn-main"></div>
+  </div>
+
+  <div class="screen" id="death-screen">
+    <h2>You died!</h2>
+    <p class="hint">Respawning…</p>
+  </div>
+
+  <div class="screen" id="help-screen">
+    <h2>Controls</h2>
+    <ul>
+      <li>W A S D — move</li>
+      <li>Mouse — look</li>
+      <li>Left click — mine / attack</li>
+      <li>Right click — place block / eat / use</li>
+      <li>Space — jump / swim up</li>
+      <li>Shift — sneak</li>
+      <li>Ctrl — sprint</li>
+      <li>E — inventory</li>
+      <li>Tab — crafting</li>
+      <li>F — furnace</li>
+      <li>Q — drop selected item</li>
+      <li>1–9 — select hotbar slot</li>
+      <li>F1 — help</li>
+      <li>F3 — debug (FPS, position)</li>
+      <li>Esc — menu</li>
+    </ul>
+    <p class="hint">Press Esc or click to close.</p>
+  </div>
+
+  <script src="vendor/three.min.js"></script>
+  <script src="js/noise.js"></script>
+  <script src="js/blocks.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/chunks.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/inventory.js"></script>
+  <script src="js/crafting.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/sky.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

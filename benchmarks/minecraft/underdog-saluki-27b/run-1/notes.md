@@ -1,12 +1,11 @@
-# Minecraft — Underdog Saluki 27B (IQ2 mix) — run 3
+# Minecraft — Underdog Saluki 27B (IQ2 mix) — run 1
 
-**Score: 27/100 — FAIL** (playable but heavily broken: rendering, rotated controls, no breaking or placing)
+**Score: 29/100 — FAIL** (playable but heavily broken: rendering, rotated controls, no breaking or placing)
 
-[▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-3/game/) · [Code](game/) · [Model](../../../../models/underdog-saluki-27b.md)
+[▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-1/game/) · [Code](game/) · [Model](../../../../models/underdog-saluki-27b.md)
 
 | | |
 |---|---|
-| Date | 2026-10-11 |
 | Agent | opencode 1.19.0 |
 | Output | Vanilla JS + Three.js 0.160 (vendored), ≈ 2,600 lines, README + `start.ps1` |
 | Duration | 2 h 45 (stopped on its own) — ≈ 1 h lost |
@@ -22,28 +21,28 @@
 | Rendering | 2/15 | World generated, but missing faces, no colors, no visible water, spawns underwater |
 | Controls | 6/15 | Movement and collisions work, but axes rotated 90°, inverted mouse, no up/down when flying |
 | Interactions | 0/15 | Left click does nothing; block placing never wired |
-| Content / UI | 3/15 | Inventory and crafting exist, but mouse stays captured (Esc needed), no item icons, no sound |
+| Content / UI | 5/15 | HUD, menus, inventory and crafting screens exist but are barely usable: mouse stays captured (Esc needed), no item icons; no sound |
 | Stability / smoothness | 3/10 | 144 FPS, no crash; black screen when re-entering a world |
 | README honesty | 1/10 | Claims placing, sprint, sound and a verified render: all false |
 | Autonomy | 3/10 | Delivered alone, but 2 hangs, 1 manual kill, destructive command, final loop |
 | Launch via README | 4/5 | `start.ps1` works (needs Python, not stated) |
 | Static hosting | 5/5 | No backend, no external dependency |
-| **Total** | **27/100** | |
+| **Total** | **29/100** | Re-scored with the anchored grid of [PROTOCOL.md](../../../../PROTOCOL.md) (first score: 27) |
 
 ## Timeline
 
-| Time | Event |
+| Time (from start) | Event |
 |---|---|
-| 18:07 | Downloads Three.js into `lib/` (no CDN) |
-| 18:11-18:30 | Writes world, blocks, physics, renderer, audio, save, UI modules |
-| 18:32-18:52 | Node test harness with Three.js and DOM stubs |
-| 18:57 | Runs `python -m http.server` in the foreground: hangs 10 min |
-| 19:07 | Relaunches with `Start-Process -NoNewWindow`: hangs again, killed by hand at 19:23 |
-| 19:31 | Kills **every** Python process on the machine, including its own search tool |
-| 19:47 | Fixes the crash on "New World" found by its headless browser test |
-| 20:06 | Context compaction; clear summary, gets back on track |
-| 20:22 | README, then `start.ps1` |
-| 20:35-20:48 | Loops on a fake bug caused by its own test, then stops |
+| H+0:03 | Downloads Three.js into `lib/` (no CDN) |
+| H+0:07 – 0:26 | Writes world, blocks, physics, renderer, audio, save, UI modules |
+| H+0:28 – 0:48 | Node test harness with Three.js and DOM stubs |
+| H+0:53 | Runs `python -m http.server` in the foreground: hangs 10 min |
+| H+1:03 | Relaunches with `Start-Process -NoNewWindow`: hangs again, killed by hand at H+1:19 |
+| H+1:27 | Kills **every** Python process on the machine, including its own search tool |
+| H+1:43 | Fixes the crash on "New World" found by its headless browser test |
+| H+2:02 | Context compaction; clear summary, gets back on track |
+| H+2:18 | README, then `start.ps1` |
+| H+2:31 – 2:44 | Loops on a fake bug caused by its own test, then stops |
 
 ## Observations
 

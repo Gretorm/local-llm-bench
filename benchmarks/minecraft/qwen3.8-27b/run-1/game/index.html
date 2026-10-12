@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voxelcraft</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%235d9c3f'/%3E%3Crect y='6' width='16' height='10' fill='%237a5230'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+      <div id="crosshair"></div>
+      <div id="damage-overlay"></div>
+      <div id="water-overlay" class="hidden"></div>
+      <div id="hearts"></div>
+      <div id="hotbar"></div>
+      <div id="debug-panel" class="hidden"></div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading-screen">
+      <div class="loading-box">
+        <h1 id="logo">VOXELCRAFT</h1>
+        <p id="loading-status">Generating world...</p>
+        <div class="progress-outer"><div id="loading-bar"></div></div>
+      </div>
+    </div>
+
+    <!-- Start -->
+    <div id="start-screen">
+      <div class="menu-box">
+        <h1 id="logo2">VOXELCRAFT</h1>
+        <p class="subtitle">a Minecraft-like voxel sandbox</p>
+        <button id="play-btn" class="mc-btn">Play</button>
+        <div class="controls-help">
+          <div><span>Mouse</span> look &middot; <span>Left click</span> break &middot; <span>Right click</span> place</div>
+          <div><span>W A S D</span> move &middot; <span>Space</span> jump &middot; <span>Shift</span> sneak</div>
+          <div><span>Double-tap W</span> sprint &middot; <span>1-9</span> select block &middot; <span>F</span> fly</div>
+          <div><span>F3</span> debug &middot; <span>Esc</span> pause</div>
+        </div>
+        <p class="hint">This game is original: every texture and sound is generated procedurally at runtime.</p>
+      </div>
+    </div>
+
+    <!-- Pause -->
+    <div id="pause-screen" class="hidden">
+      <div class="menu-box">
+        <h2>Game paused</h2>
+        <button id="resume-btn" class="mc-btn">Back to game</button>
+      </div>
+    </div>
+
+    <!-- Death -->
+    <div id="death-screen" class="hidden">
+      <div class="menu-box">
+        <h2 id="death-title">You died!</h2>
+        <button id="respawn-btn" class="mc-btn">Respawn</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/three.min.js"></script>
+  <script src="js/noise.js"></script>
+  <script src="js/blocks.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

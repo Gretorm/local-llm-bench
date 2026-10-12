@@ -1,0 +1,10 @@
+{
+  "benchmark": "minecraft",
+  "model": "Qwen3.8 27B",
+  "model_slug": "qwen3.8-27b",
+  "quant": "UD-IQ3_XXS",
+  "run": 1,
+  "agent": "opencode 1.19.0",
+  "score": 68,
+  "verdict": "PARTIAL"
+}

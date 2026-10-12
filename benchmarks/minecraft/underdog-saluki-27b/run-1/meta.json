@@ -3,9 +3,8 @@
   "model": "Underdog Saluki 27B",
   "model_slug": "underdog-saluki-27b",
   "quant": "IQ2 mix",
-  "run": 3,
-  "date": "2026-10-11",
+  "run": 1,
   "agent": "opencode 1.19.0",
-  "score": 27,
+  "score": 29,
   "verdict": "FAIL"
 }

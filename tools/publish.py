@@ -66,7 +66,7 @@ def build_index(runs):
         e = {k: html.escape(str(v)) for k, v in r.items()}
         rows.append(
             f'<tr><td><a href="{e["model_page"]}">{e["model"]}</a>'
-            f'<span class="sub">{e["quant"]} · run {e["run"]} · {e["date"]}</span></td>'
+            f'<span class="sub">{e["quant"]} · run {e["run"]}</span></td>'
             f'<td><a class="play" href="{e["play"]}">▶ Play</a></td>'
             f'<td><span class="score" style="--c:{verdict_color(r["score"])}">{e["score"]}</span>'
             f'<span class="sub">{e["verdict"]}</span></td>'

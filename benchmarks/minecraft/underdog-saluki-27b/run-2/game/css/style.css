@@ -1,0 +1,143 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Courier New', monospace;
+  user-select: none;
+}
+
+#game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* HUD */
+#hearts, #hunger {
+  position: absolute;
+  bottom: 44px;
+  display: flex;
+  gap: 1px;
+}
+#hearts { left: 50%; transform: translateX(-160px); }
+#hunger { left: 50%; transform: translateX(160px); }
+#selected-name {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  font-size: 14px;
+}
+#clock {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  font-size: 14px;
+}
+#debug {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: #0f0;
+  font-size: 12px;
+}
+
+#hotbar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+
+.slot {
+  position: relative;
+  border: 2px solid #555;
+  background: rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.slot.selected { border-color: #fff; }
+.slot-count {
+  position: absolute;
+  bottom: 0;
+  right: 1px;
+  color: #fff;
+  font-size: 11px;
+  text-shadow: 1px 1px #000;
+}
+
+/* screens */
+.screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(10, 10, 20, 0.85);
+  border: 2px solid #444;
+  padding: 20px 28px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  z-index: 10;
+}
+.screen h2 { margin: 0 0 14px; font-size: 20px; }
+.screen button {
+  padding: 8px 16px;
+  margin: 4px;
+  background: #3a3a3a;
+  color: #fff;
+  border: 2px solid #666;
+  cursor: pointer;
+  font-family: inherit;
+}
+.screen button:hover { background: #555; }
+
+.slot-row {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 32px);
+  gap: 2px;
+}
+.slot-grid + .slot-grid { margin-top: 10px; }
+
+.craft-area {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.craft-out {
+  border: 2px solid #888;
+  padding: 4px;
+}
+.craft-out .slot { border: none; background: none; }
+
+.furnace-area {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.progress {
+  width: 60px;
+  height: 10px;
+  background: #222;
+  border: 1px solid #555;
+}
+.hint { color: #aaa; font-size: 12px; margin-top: 10px; }
