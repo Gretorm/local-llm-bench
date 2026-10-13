@@ -60,15 +60,20 @@ def build_readme(runs):
                     f"<b>{b['score']}/100</b> {b['verdict']} (best of {n}: run {b['run']}) · "
                     f"<a href=\"{b['play']}\">▶ Play</a> · <a href=\"{b['notes']}\">Notes</a> · "
                     f"<a href=\"{b['code']}\">Code</a></summary>", "",
-                    "| Run | Play | Score | Notes | Code | Context window | tok/s |",
-                    "|---|---|---|---|---|---|---|"]
+                    "| Run | Play | Score | Notes | Code | Run time | Context window | tok/s |",
+                    "|---|---|---|---|---|---|---|---|"]
             for r in mruns:
                 out.append(
                     f"| {r['run']} | [▶ Play]({r['play']}) | **{r['score']}/100** {r['verdict']} "
-                    f"| [Notes]({r['notes']}) | [Code]({r['code']}) | {context_label(r)} | {r.get('tok_s', '—')} |"
+                    f"| [Notes]({r['notes']}) | [Code]({r['code']}) | {duration_label(r)} | {context_label(r)} | {r.get('tok_s', '—')} |"
                 )
             out += ["", "</details>", ""]
     return "\n".join(out)
+
+
+def duration_label(r):
+    m = r.get("duration_min")
+    return f"{m // 60} h {m % 60:02d}" if m else "—"
 
 
 def context_label(r):
@@ -95,7 +100,7 @@ def build_index(runs):
                     f'<td><span class="score" style="--c:{verdict_color(r["score"])}">{f["score"]}</span> '
                     f'<span class="sub">{f["verdict"]}</span></td>'
                     f'<td><a href="{f["notes"]}">Notes</a></td><td><a href="{f["code"]}">Code</a></td>'
-                    f'<td>{html.escape(context_label(r))}</td><td>{html.escape(str(r.get("tok_s", "—")))}</td></tr>'
+                    f'<td>{html.escape(duration_label(r))}</td><td>{html.escape(context_label(r))}</td><td>{html.escape(str(r.get("tok_s", "—")))}</td></tr>'
                 )
             items.append(
                 f'<details><summary>'
@@ -107,7 +112,7 @@ def build_index(runs):
                 f'<a href="{e["notes"]}">Notes</a><a href="{e["code"]}">Code</a>'
                 f'<span class="runs">{n}</span></summary>\n'
                 f'<div class="detail"><table><thead><tr><th>Run</th><th>Play</th><th>Score</th><th>Notes</th>'
-                f'<th>Code</th><th>Context window</th><th>tok/s</th></tr></thead><tbody>\n'
+                f'<th>Code</th><th>Run time</th><th>Context window</th><th>tok/s</th></tr></thead><tbody>\n'
                 + "\n".join(rows) + "\n</tbody></table></div></details>"
             )
         sections.append(

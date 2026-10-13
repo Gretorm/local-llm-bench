@@ -7,6 +7,7 @@
   "agent": "opencode 1.19.0",
   "score": 68,
   "verdict": "PARTIAL",
+  "duration_min": 207,
   "context": 131072,
   "kv_cache": "q8_0",
   "tok_s": 18.2
