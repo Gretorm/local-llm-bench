@@ -30,5 +30,5 @@ Run 1 used `-c 262144 -ctk q4_0 -ctv q4_0`, everything else identical.
 
 | Benchmark | Run | Score | Notes |
 |---|---|---|---|
-| Minecraft | 1 | 29/100 FAIL | [notes](../benchmarks/minecraft/underdog-saluki-27b/run-1/notes.md) |
-| Minecraft | 2 | 3/100 FAIL | [notes](../benchmarks/minecraft/underdog-saluki-27b/run-2/notes.md) |
+| Minecraft | 1 | 20/100 FAIL | [notes](../benchmarks/minecraft/underdog-saluki-27b/run-1/notes.md) |
+| Minecraft | 2 | 0/100 FAIL | [notes](../benchmarks/minecraft/underdog-saluki-27b/run-2/notes.md) |

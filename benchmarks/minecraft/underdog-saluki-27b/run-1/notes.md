@@ -1,6 +1,6 @@
 # Minecraft — Underdog Saluki 27B (IQ2 mix) — run 1
 
-**Score: 29/100 — FAIL** (playable but heavily broken: rendering, rotated controls, no breaking or placing)
+**Score: 20/100 — FAIL** (playable but heavily broken: rendering, rotated controls, no breaking or placing)
 
 [▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-1/game/) · [Code](game/) · [Model](../../../../models/underdog-saluki-27b.md)
 
@@ -27,7 +27,8 @@
 | Autonomy | 3/10 | Delivered alone, but 2 hangs, 1 manual kill, destructive command, final loop |
 | Launch via README | 4/5 | `start.ps1` works (needs Python, not stated) |
 | Static hosting | 5/5 | No backend, no external dependency |
-| **Total** | **29/100** | Re-scored with the anchored grid of [PROTOCOL.md](../../../../PROTOCOL.md) (first score: 27) |
+| Other criteria | 16/40 × 13/30 = 6.9 | Weighted by playability (below 30/60), see [PROTOCOL.md](../../../../PROTOCOL.md) |
+| **Total** | **20/100** | 13 + 6.9. Re-scored with the playability weighting (was 29; first score with the old grid: 27) |
 
 ## Timeline
 

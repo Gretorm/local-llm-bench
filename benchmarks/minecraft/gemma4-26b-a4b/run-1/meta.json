@@ -1,0 +1,14 @@
+{
+  "benchmark": "minecraft",
+  "model": "Gemma 4 26B-A4B",
+  "model_slug": "gemma4-26b-a4b",
+  "quant": "UD-Q4_K_M",
+  "run": 1,
+  "agent": "opencode 1.19.0",
+  "score": 11,
+  "verdict": "FAIL",
+  "duration_min": 13,
+  "context": 131072,
+  "kv_cache": "q8_0",
+  "tok_s": 31.8
+}

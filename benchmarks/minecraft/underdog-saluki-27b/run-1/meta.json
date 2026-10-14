@@ -5,7 +5,7 @@
   "quant": "IQ2 mix",
   "run": 1,
   "agent": "opencode 1.19.0",
-  "score": 29,
+  "score": 20,
   "verdict": "FAIL",
   "duration_min": 165,
   "context": 262144,

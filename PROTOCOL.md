@@ -22,6 +22,7 @@ Identical for every model; each run's notes list any difference.
 | Context | 131,072 tokens, KV cache `q8_0` |
 | Tools | Shell (PowerShell), file tools, web fetch, web search (DuckDuckGo MCP), browser ([Playwright MCP](https://github.com/microsoft/playwright-mcp), Edge, isolated profile; screenshots sent only to vision models) |
 | Permissions | Everything allowed inside the run folder, nothing outside it |
+| Account | From Gemma 4 26B-A4B run 1 on, the agent runs as a dedicated low-privilege Windows user that cannot read anything outside its run folder (same Node.js, Python and git versions as before) |
 
 The run folder is its own git repository and opencode starts with `OPENCODE_DISABLE_CLAUDE_CODE=1`, so no instruction file from parent folders (which hold the evaluation grid) can reach the model.
 
@@ -65,6 +66,8 @@ Evaluated by a human player. The grid is never shown to the model.
 | Agent autonomy (hangs, loops, tool errors, interventions) | 10 |
 | Launches by following the README, without fixes | 5 |
 | Works as plain static files | 5 |
+
+**Total** = playability + other criteria × min(1, playability / 30), rounded. The 40 points outside playability count fully only once the game reaches 30/60 in playability, so a tiny or broken game cannot score on process alone: a skeleton does not crash, has no time to loop and is trivially static. Playability is scored from the player's side: code that cannot be used on screen earns nothing. Caps: stability ≤ 5 when nothing can be seen or played; autonomy ≤ 4 when the agent stopped without ever running its game. (Rule introduced with Gemma 4 26B-A4B run 1; earlier runs were re-scored.)
 
 Verdict: **PASS** ≥ 70, **PARTIAL** 40-69, **FAIL** < 40.
 

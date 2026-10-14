@@ -1,6 +1,6 @@
 # Minecraft — Underdog Saluki 27B (IQ2 mix) — run 2
 
-**Score: 3/100 — FAIL** (official state, at the 3rd intervention: the page does not load, 2 syntax errors)
+**Score: 0/100 — FAIL** (official state, at the 3rd intervention: the page does not load, 2 syntax errors)
 
 [▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/underdog-saluki-27b/run-2/game/) · [Code](game/) · [Model](../../../../models/underdog-saluki-27b.md)
 
@@ -36,7 +36,8 @@ The model ran text-only (no vision projector loaded). The published game is the 
 | Autonomy | 1/10 | Wrote the game alone, but 3 hanging web servers (3 interventions), never ran its code before H+1:07 |
 | Launch via README | 0/5 | No README, no launcher |
 | Static hosting | 2/5 | Classic scripts, Three.js vendored, no backend; but nothing runs |
-| **Total** | **3/100** | Anchored grid, see [PROTOCOL.md](../../../../PROTOCOL.md) |
+| Other criteria | 3/40 × 0/30 = 0 | Weighted by playability, see [PROTOCOL.md](../../../../PROTOCOL.md) |
+| **Total** | **0/100** | Nothing reaches the player. Re-scored with the playability weighting (was 3) |
 
 ## Timeline
 
@@ -66,6 +67,6 @@ The model ran text-only (no vision projector loaded). The published game is the 
 - With a 131K window it compacts every 15-20 minutes: it rereads whole files, and each compaction restarts at ≈ 44K. Seven compactions in under 3 hours, and it loses its thread after them (loop, then disorientation).
 - Once it could use the browser, it did read console errors and fixed real bugs, but it masked the last one with try/catch instead of reading its own one-line render call.
 
-## Compared with run 1 (29/100)
+## Compared with run 1 (20/100)
 
 Run 1 used a 262K context (one compaction), no browser tool and no restriction on files outside the run folder. Run 2 caps the context at 131K, adds a browser tool and denies file access outside the folder. The same weakness (a web server that hangs the shell) ended both runs badly; run 2 delivers neither a visible world nor a README.
