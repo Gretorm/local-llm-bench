@@ -1,6 +1,6 @@
 # Minecraft — Qwen3.8 27B (UD-IQ3_XXS) — run 2
 
-**Score: 46/100 — PARTIAL** (trivial blocker rule: 61 once a one-line bug is fixed, × 0.75; strict score 14/100). As published, the mouse is never captured: in its last 3 minutes the agent wrapped `requestPointerLock()` in a helper `lockPointer()` that calls itself, an infinite recursion hidden by a `try/catch`. Once that line is fixed: a textured world with menus, world saves, survival and creative modes, break and place with drops into the hotbar; but jumping never works, tree blocks show the TNT texture, dug holes render black, and there is no crafting and no mobs.
+**Score: 46/100 — PARTIAL** (trivial blocker rule: 61 once a one-line bug is fixed, × 0.75; strict score 14/100). As delivered by the model, the mouse is never captured: in its last 3 minutes the agent wrapped `requestPointerLock()` in a helper `lockPointer()` that calls itself, an infinite recursion hidden by a `try/catch`. Once that line is fixed: a textured world with menus, world saves, survival and creative modes, break and place with drops into the hotbar; but jumping never works, tree blocks show the TNT texture, dug holes render black, and there is no crafting and no mobs.
 
 [▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/qwen3.8-27b/run-2/game/) · [Code](game/) · [Model](../../../../models/qwen3.8-27b.md) · [Run 1](../run-1/notes.md)
 
@@ -18,11 +18,11 @@ Same model file, engine, server settings and sampling as [run 1](../run-1/notes.
 
 Speed: 27-29 tok/s in the first hour, then lower as the context grew. In the last hour other applications on the test machine took video memory, part of the model spilled into system memory and generation fell to 12-15 tok/s for about 25 minutes (17-22 tok/s at the end). This slowed the run but did not change what the agent did.
 
-The published game is the model's code, untouched (the bug above included).
+Published copy: the model's code with that one line fixed (`js/main.js`, inside `lockPointer()`: `var p = lockPointer();` → `var p = canvas.requestPointerLock();`), so the game can be played; nothing else is changed.
 
 ## Score
 
-The game as delivered scores 14/100: the menus work and the spawn view of a textured world is drawn, but nothing else can be used without the mouse being captured (playability 8/60: rendering 4, controls 0, interactions 0, content 4; other criteria 24/40 × 8/30). Under the [trivial blocker rule](../../../../PROTOCOL.md) the game is scored after a one-line fix made in a private copy (`js/main.js`, inside `lockPointer()`: `var p = lockPointer();` → `var p = canvas.requestPointerLock();`), then × 0.75:
+The game as delivered scores 14/100: the menus work and the spawn view of a textured world is drawn, but nothing else can be used without the mouse being captured (playability 8/60: rendering 4, controls 0, interactions 0, content 4; other criteria 24/40 × 8/30). Under the [trivial blocker rule](../../../../PROTOCOL.md) the game is scored after a one-line fix, the one included in the published copy (`js/main.js`, inside `lockPointer()`: `var p = lockPointer();` → `var p = canvas.requestPointerLock();`), then × 0.75:
 
 | Criterion | Score | Why (game with the one-line fix) |
 |---|---|---|

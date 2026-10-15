@@ -734,7 +734,7 @@
   // ---------- input ----------
   function lockPointer() {
     try {
-      var p = lockPointer();
+      var p = canvas.requestPointerLock();
       if (p && typeof p.catch === 'function') p.catch(function () {});
     } catch (e) {}
   }
