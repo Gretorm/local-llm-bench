@@ -35,3 +35,11 @@ Models ranked by their best run; click a model to see all its runs.
 | 2 | [▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/gemma4-26b-a4b/run-2/play/) | **16/100** FAIL | [Notes](https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/gemma4-26b-a4b/run-2/notes.md) | [Code](https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/gemma4-26b-a4b/run-2/game) | 0 h 13 | 131K (KV q8_0) | 58.4 |
 
 </details>
+
+<details><summary><b><a href="https://github.com/Gretorm/local-llm-bench/blob/main/models/minicpm-v4.7-35b-a3b.md">MiniCPM-V 4.7 35B-A3B</a></b> Q4_K_M — <b>3/100</b> FAIL (best of 1 run: run 1) · <a href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/game/">▶ Play</a> · <a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/notes.md">Notes</a> · <a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/game">Code</a></summary>
+
+| Run | Play | Score | Notes | Code | Run time | Context window | tok/s |
+|---|---|---|---|---|---|---|---|
+| 1 | [▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/game/) | **3/100** FAIL | [Notes](https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/notes.md) | [Code](https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/game) | 0 h 08 | 131K (KV q8_0) | 42 |
+
+</details>

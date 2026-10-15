@@ -1,0 +1,14 @@
+{
+  "benchmark": "minecraft",
+  "model": "MiniCPM-V 4.7 35B-A3B",
+  "model_slug": "minicpm-v4.7-35b-a3b",
+  "quant": "Q4_K_M",
+  "run": 1,
+  "agent": "opencode 1.19.0",
+  "score": 3,
+  "verdict": "FAIL",
+  "duration_min": 8,
+  "context": 131072,
+  "kv_cache": "q8_0",
+  "tok_s": 42
+}
