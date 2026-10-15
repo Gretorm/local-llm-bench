@@ -1,0 +1,14 @@
+{
+  "benchmark": "minecraft",
+  "model": "Muse Glimmer 30B",
+  "model_slug": "muse-glimmer-30b",
+  "quant": "UD-IQ3_M",
+  "run": 1,
+  "agent": "opencode 1.19.0",
+  "score": 0,
+  "verdict": "FAIL",
+  "duration_min": 11,
+  "context": 131072,
+  "kv_cache": "q8_0",
+  "tok_s": 35
+}

@@ -43,3 +43,11 @@ Models ranked by their best run; click a model to see all its runs.
 | 1 | [▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/game/) | **3/100** FAIL | [Notes](https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/notes.md) | [Code](https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/minicpm-v4.7-35b-a3b/run-1/game) | 0 h 08 | 131K (KV q8_0) | 42 |
 
 </details>
+
+<details><summary><b><a href="https://github.com/Gretorm/local-llm-bench/blob/main/models/muse-glimmer-30b.md">Muse Glimmer 30B</a></b> UD-IQ3_M — <b>0/100</b> FAIL (best of 1 run: run 1) · <a href="https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/muse-glimmer-30b/run-1/game/">▶ Play</a> · <a href="https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/muse-glimmer-30b/run-1/notes.md">Notes</a> · <a href="https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/muse-glimmer-30b/run-1/game">Code</a></summary>
+
+| Run | Play | Score | Notes | Code | Run time | Context window | tok/s |
+|---|---|---|---|---|---|---|---|
+| 1 | [▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/muse-glimmer-30b/run-1/game/) | **0/100** FAIL | [Notes](https://github.com/Gretorm/local-llm-bench/blob/main/benchmarks/minecraft/muse-glimmer-30b/run-1/notes.md) | [Code](https://github.com/Gretorm/local-llm-bench/tree/main/benchmarks/minecraft/muse-glimmer-30b/run-1/game) | 0 h 11 | 131K (KV q8_0) | 35 |
+
+</details>
