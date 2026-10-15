@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blockcraft</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<div id="game-container">
+  <canvas id="game-canvas"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div id="crosshair"></div>
+    <div id="damage-flash"></div>
+    <div id="water-tint"></div>
+    <div id="vignette"></div>
+
+    <div id="air-bar-wrap" class="hidden">
+      <div id="air-bar"></div>
+    </div>
+    <div id="hunger-wrap">
+      <div id="hunger-bar"></div>
+    </div>
+    <div id="health-wrap">
+      <div id="health-bar"></div>
+    </div>
+
+    <div id="hotbar"></div>
+
+    <div id="break-progress" class="hidden"></div>
+
+    <div id="debug-overlay" class="hidden"></div>
+
+    <div id="toast" class="hidden"></div>
+  </div>
+
+  <!-- Menus -->
+  <div id="title-screen">
+    <div id="title-bg-canvas-wrap">
+      <canvas id="title-bg" width="4" height="4"></canvas>
+    </div>
+    <div id="title-box">
+      <div id="game-logo">BLOCKCRAFT</div>
+      <div id="game-subtitle">A voxel sandbox &mdash; web edition</div>
+    </div>
+    <div id="menu">
+      <div class="menu-btn" id="btn-play">Singleplayer</div>
+      <div class="menu-btn" id="btn-options">Options</div>
+      <div class="menu-btn" id="btn-help">Controls</div>
+      <div class="menu-footer">
+        <span>Blockcraft 1.0 &mdash; not affiliated with Mojang</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="world-select" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-title">World select</div>
+      <div class="panel-row">
+        <label class="panel-label">World name</label>
+        <input id="world-name" type="text" value="New World" maxlength="24">
+      </div>
+      <div class="panel-row">
+        <label class="panel-label">Seed <span class="muted">(blank = random)</span></label>
+        <input id="world-seed" type="text" placeholder="e.g. 12345" maxlength="12">
+      </div>
+      <div class="panel-row">
+        <label class="panel-label">Starting mode</label>
+        <select id="world-mode">
+          <option value="survival">Survival</option>
+          <option value="creative">Creative</option>
+        </select>
+      </div>
+      <div class="panel-actions">
+        <div class="menu-btn" id="btn-create">Create new world</div>
+        <div class="menu-btn secondary" id="btn-cancel-select">Cancel</div>
+      </div>
+      <div id="saved-list" class="panel-saved"></div>
+    </div>
+  </div>
+
+  <div id="options-screen" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-title">Options</div>
+      <div class="panel-row">
+        <label class="panel-label">Master volume</label>
+        <input id="opt-master" type="range" min="0" max="100" value="70">
+      </div>
+      <div class="panel-row">
+        <label class="panel-label">Music volume</label>
+        <input id="opt-music" type="range" min="0" max="100" value="60">
+      </div>
+      <div class="panel-row">
+        <label class="panel-label">Music</label>
+        <select id="opt-music-on">
+          <option value="1">On</option>
+          <option value="0">Off</option>
+        </select>
+      </div>
+      <div class="panel-row">
+        <label class="panel-label">Render distance (chunks)</label>
+        <select id="opt-render">
+          <option>5</option><option selected>7</option><option>9</option><option>11</option>
+        </select>
+      </div>
+      <div class="panel-row">
+        <label class="panel-label">FOV</label>
+        <input id="opt-fov" type="range" min="60" max="110" value="80">
+      </div>
+      <div class="panel-actions">
+        <div class="menu-btn secondary" id="btn-options-back">Back</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="help-screen" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-title">Controls</div>
+      <div class="panel-help">
+        <div><b>Move</b> &mdash; W A S D</div>
+        <div><b>Look</b> &mdash; mouse</div>
+        <div><b>Jump</b> / <b>Fly up</b> &mdash; Space</div>
+        <div><b>Sneak</b> / <b>Fly down</b> &mdash; Shift</div>
+        <div><b>Sprint</b> &mdash; double-tap W or hold Ctrl</div>
+        <div><b>Break block</b> &mdash; hold Left Mouse</div>
+        <div><b>Place block</b> &mdash; Right Mouse</div>
+        <div><b>Hotbar</b> &mdash; 1&ndash;9 / mouse wheel</div>
+        <div><b>Inventory / blocks</b> &mdash; E</div>
+        <div><b>Creative fly</b> &mdash; F</div>
+        <div><b>Mode</b> &mdash; M (creative/survival)</div>
+        <div><b>Pause menu</b> &mdash; Esc</div>
+        <div><b>Debug (F3)</b> &mdash; F3</div>
+      </div>
+      <div class="panel-actions">
+        <div class="menu-btn secondary" id="btn-help-back">Back</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pause-screen" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-title">Game menu</div>
+      <div class="panel-actions">
+        <div class="menu-btn" id="btn-pause-resume">Back to game</div>
+        <div class="menu-btn" id="btn-pause-save">Save world</div>
+        <div class="menu-btn secondary" id="btn-pause-quit">Save &amp; quit to title</div>
+      </div>
+      <div class="panel-hint">World is auto-saved when you quit.</div>
+    </div>
+  </div>
+
+  <div id="inventory-screen" class="overlay hidden">
+    <div class="panel panel-wide">
+      <div class="panel-title" id="inventory-title">Inventory</div>
+      <div id="inventory-grid"></div>
+      <div class="panel-actions">
+        <div class="menu-btn secondary" id="btn-inv-close">Close</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="death-screen" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-death">You died!</div>
+      <div class="panel-actions">
+        <div class="menu-btn" id="btn-respawn">Respawn</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="loading-screen" class="overlay hidden">
+    <div class="loading-box">
+      <div class="panel-title" id="loading-title">Generating world...</div>
+      <div class="loading-bar-outer"><div class="loading-bar-inner" id="loading-bar"></div></div>
+      <div class="muted" id="loading-sub">Placing trees...</div>
+    </div>
+  </div>
+
+  <div id="pointer-hint" class="hidden">
+    Click to play
+  </div>
+</div>
+
+<script src="js/three.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/blocks.js"></script>
+<script src="js/textures.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/world.js"></script>
+<script src="js/mesher.js"></script>
+<script src="js/player.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

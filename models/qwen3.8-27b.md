@@ -32,7 +32,8 @@ Tested at 131K context with an 8-bit KV cache (the benchmark setting):
 ## Speed
 
 - Generation (temperature 0): 61 tok/s on a short prompt, 53 tok/s after 20K tokens, 33 tok/s at 80K, 27 tok/s at 120K (MTP draft acceptance 81-88 %).
-- In the agent (temperature 1.0, thinking on): ≈ 30 tok/s at start, 18 tok/s average over the run.
+- In the agent (temperature 1.0, thinking on): ≈ 30 tok/s at start; 18 tok/s average over run 1 and 23.5 over run 2 (both slowed by video memory spilling into system memory when other applications were opened during the run).
+- Pre-run checks gave either 61 or 42 tok/s on a short prompt at the same memory use; the cause of the slower state was not found.
 - Prompt processing: ≈ 690 tok/s at 20K tokens, 350 tok/s at 120K.
 
 ## Runs
@@ -40,3 +41,4 @@ Tested at 131K context with an 8-bit KV cache (the benchmark setting):
 | Benchmark | Run | Score | Notes |
 |---|---|---|---|
 | Minecraft | 1 | 68/100 PARTIAL | [notes](../benchmarks/minecraft/qwen3.8-27b/run-1/notes.md) |
+| Minecraft | 2 | 46/100 PARTIAL (61 once a one-line bug is fixed, × 0.75) | [notes](../benchmarks/minecraft/qwen3.8-27b/run-2/notes.md) |

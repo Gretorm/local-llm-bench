@@ -1,6 +1,6 @@
 # Minecraft — Muse Glimmer 30B (UD-IQ3_M) — run 1
 
-**Score: 0/100 — FAIL** (black screen: a one-character typo, `dy:1:0` instead of `dy?1:0`, in unused meshing code is a syntax error, so the game's only script never runs; stopped after 11 minutes without ever looking at its game)
+**Score: 13/100 — FAIL** (trivial blocker rule: 17 once a one-character typo is fixed, × 0.75; strict score 0/100). As published: black screen, a one-character typo, `dy:1:0` instead of `dy?1:0`, in unused meshing code is a syntax error, so the game's only script never runs; stopped after 11 minutes without ever looking at its game. Once fixed: textured hills and trees, but 1-2 FPS, no collision, the player falls through the ground.
 
 [▶ Play](https://gretorm.github.io/local-llm-bench/benchmarks/minecraft/muse-glimmer-30b/run-1/game/) · [Code](game/) · [Model](../../../../models/muse-glimmer-30b.md) · [Fix phase](fix/notes.md) (scored separately: 18/100)
 
@@ -32,9 +32,9 @@ Published copy: the game is untouched except for one line of its README, where t
 | Launch via README | 3/5 | `python -m http.server 8000` then http://localhost:8000 works as written; the page loads but stays black |
 | Static hosting | 4/5 | One static HTML file, no build; Three.js pinned (0.160.0) from a CDN instead of vendored |
 | Other criteria | 12/40 × 0/30 = 0 | Weighted by playability (below 30/60), see [PROTOCOL.md](../../../../PROTOCOL.md) |
-| **Total** | **0/100** | 0 + 0 |
+| **Total (as published, strict)** | **0/100** | 0 + 0 |
 
-Not scored, for information: with that one character fixed in a copy, the page shows a sky-blue world of textured blocks with trees and a 9-slot hotbar, the camera starting inside a block. The [fix phase](fix/notes.md) shows how the model did when asked to play-test and repair its own game.
+**Official score under the [trivial blocker rule](../../../../PROTOCOL.md)** (re-checked when the rule was introduced): with that one character fixed in a private copy, the page loads and shows a sky-blue world of textured hills and trees and a 9-slot hotbar, the camera starting inside a block. The rendering and player code is the same as in the game of the [fix phase](fix/notes.md), which was played in a desktop browser: 1-2 FPS (one mesh and one material per block), no collision, the player falls through the ground. Scored like that game: rendering 4, controls 2, interactions 2, content 3 = 11/60; other criteria 16/40 (stability 2, README 2, autonomy 3, launch 5 since the page now loads as written, static hosting 4) × 11/30 = 5.9; total 17/100, × 0.75 = **13/100**. The published game stays untouched.
 
 ## Timeline
 

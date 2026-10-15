@@ -5,7 +5,7 @@
   "quant": "UD-IQ3_M",
   "run": 1,
   "agent": "opencode 1.19.0",
-  "score": 0,
+  "score": 13,
   "verdict": "FAIL",
   "duration_min": 11,
   "context": 131072,

@@ -69,6 +69,8 @@ Evaluated by a human player. The grid is never shown to the model.
 
 **Total** = playability + other criteria × min(1, playability / 30), rounded. The 40 points outside playability count fully only once the game reaches 30/60 in playability, so a tiny or broken game cannot score on process alone: a skeleton does not crash, has no time to loop and is trivially static. Playability is scored from the player's side: code that cannot be used on screen earns nothing. Caps: stability ≤ 5 when nothing can be seen or played; autonomy ≤ 4 when the agent stopped without ever running its game. (Rule introduced with Gemma 4 26B-A4B run 1; earlier runs were re-scored.)
 
+**Trivial blocker**: when a game cannot be played at all only because of a bug that a change of at most 2 lines fixes without adding logic (a typo, a missing import or export, a wrong name, a call to the wrong function), the game is scored after that minimal fix and the total is multiplied by **0.75**, rounded. The fix is made in a private copy only: the published game stays untouched, and the run notes give the strict score, the fixed lines and the scaled score (the official one). A bug that needs more than 2 lines or new logic gets no such treatment. (Rule introduced with Qwen3.8 27B run 2; earlier runs were re-checked.)
+
 Verdict: **PASS** ≥ 70, **PARTIAL** 40-69, **FAIL** < 40.
 
 **Playability anchors.** The reference is the real Minecraft, as the prompt asks. Scores fall between anchors; a bug counts once, in the criterion it hurts most.

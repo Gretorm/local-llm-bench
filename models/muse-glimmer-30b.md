@@ -35,5 +35,5 @@ UD-IQ3_M is the biggest quant that fits in 16 GB with the benchmark's 131K conte
 
 | Benchmark | Run | Score | Notes |
 |---|---|---|---|
-| Minecraft | 1 | 0/100 FAIL | [notes](../benchmarks/minecraft/muse-glimmer-30b/run-1/notes.md) |
+| Minecraft | 1 | 13/100 FAIL (17 once a one-character typo is fixed, × 0.75; strict 0) | [notes](../benchmarks/minecraft/muse-glimmer-30b/run-1/notes.md) |
 | Minecraft | 1, fix phase (scored separately) | 18/100 FAIL | [notes](../benchmarks/minecraft/muse-glimmer-30b/run-1/fix/notes.md) |
