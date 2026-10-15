@@ -22,7 +22,8 @@ def load_runs():
     for meta in sorted(ROOT.glob("benchmarks/*/*/run-*/meta.json")):
         m = json.loads(meta.read_text(encoding="utf-8"))
         rel = meta.parent.relative_to(ROOT).as_posix()
-        m["play"] = f"{SITE}/{rel}/game/"
+        # play_path: a hosting build next to game/ (e.g. "play/"), when the untouched game cannot run on Pages
+        m["play"] = f"{SITE}/{rel}/{m.get('play_path', 'game/')}"
         m["notes"] = f"{REPO}/blob/main/{rel}/notes.md"
         m["code"] = f"{REPO}/tree/main/{rel}/game"
         m["model_page"] = f"{REPO}/blob/main/models/{m['model_slug']}.md"
@@ -130,7 +131,8 @@ def main():
         dst = ROOT / "benchmarks" / bench / model / f"run-{run}" / "game"
         if dst.exists():
             shutil.rmtree(dst)
-        shutil.copytree(src, dst, ignore=shutil.ignore_patterns(".git"))
+        # node_modules: installed dependencies, recreated by `npm install`, not the model's code
+        shutil.copytree(src, dst, ignore=shutil.ignore_patterns(".git", "node_modules"))
         print(f"copied {src} -> {dst.relative_to(ROOT)}")
         return
     runs = load_runs()

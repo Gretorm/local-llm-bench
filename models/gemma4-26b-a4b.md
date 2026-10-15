@@ -5,7 +5,7 @@
 | Weights | `gemma-4-26B-A4B-it-UD-Q4_K_M.gguf` (16.95 GB, Unsloth Dynamic), [unsloth/gemma-4-26B-A4B-it-GGUF](https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF); MTP drafter `mtp-gemma-4-26B-A4B-it.gguf` (Q8_0, 0.46 GB) and vision projector `mmproj-F16.gguf` (1.19 GB) from the same repo |
 | Base | [google/gemma-4-26B-A4B-it](https://huggingface.co/google/gemma-4-26B-A4B-it) (Apache-2.0), Mixture-of-Experts: 25.2B parameters, 3.8B active (8 of 128 experts + 1 shared), 30 layers, sliding-window attention (1024) with one global layer in six; native context 262144; vision |
 | Engine | llama.cpp b11553, Vulkan build |
-| Memory | ≈ 15.3 GB of VRAM; the experts of 10 layers (5.8 GB) stay in system RAM; vision projector on the CPU |
+| Memory | ≈ 15.3 GB of VRAM; the experts of 10 layers (5.8 GB) stay in system RAM; vision projector on the CPU. System RAM reached 94 % of 32 GB during a run (8 GB prompt cache): use a smaller `--cache-ram` |
 
 ## Server settings
 
@@ -30,10 +30,11 @@
 | QAT UD-Q4_K_XL | 14.25 GB | 6 expert layers in RAM + MTP | 92 → 77 | (different checkpoint) | 51.7 % |
 | **UD-Q4_K_M** | 16.95 GB | 10 expert layers in RAM + MTP | **61 → 56** | **0.029** | **78.7 %** |
 
-UD-Q4_K_M was kept as the closest to the original model. Speeds above are at temperature 0; in the agent (temperature 1.0, thinking on) it ran at 24-26 tok/s while thinking and 31.8 tok/s on average: the MTP drafter is accepted less often, and with experts in RAM the CPU is the bottleneck.
+UD-Q4_K_M was kept as the closest to the original model. Speeds above are at temperature 0; in the agent (temperature 1.0, thinking on) it ran at 31.8 tok/s on average in run 1 (24-26 while thinking) and 58.4 tok/s in run 2, with the same settings. The gap with the temperature-0 figures varies with how often the MTP drafts are accepted (50 % while thinking, 77-82 % over a run); with experts in RAM, rejected drafts cost CPU time.
 
 ## Runs
 
 | Benchmark | Run | Score | Notes |
 |---|---|---|---|
 | Minecraft | 1 | 11/100 FAIL | [notes](../benchmarks/minecraft/gemma4-26b-a4b/run-1/notes.md) |
+| Minecraft | 2 | 16/100 FAIL | [notes](../benchmarks/minecraft/gemma4-26b-a4b/run-2/notes.md) |

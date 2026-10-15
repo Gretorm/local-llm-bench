@@ -1,0 +1,21 @@
+{
+  "name": "minecraft-clone",
+  "version": "1.0.0",
+  "description": "A Minecraft clone in the browser",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "simplex-noise": "^4.0.3",
+    "three": "^0.186.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}
